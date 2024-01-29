@@ -56,13 +56,13 @@ export default {
         });
     },
     manufacturerSelectOnChange(event) {
-      let path = "http://localhost:5001/starships"
+      let path = "http://localhost:5001/starships"  
       const selectedManufacturer = event.target.value
 
       if (selectedManufacturer) {
         path = `http://localhost:5001/starships/${selectedManufacturer}`;
       }
-      
+
       axios.get(path)
         .then((res) => {
           this.starships = res.data.starships;
