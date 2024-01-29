@@ -17,15 +17,23 @@ def health_check():
 def get_all_starships():
     starship_service = StarshipService()
 
-    return starship_service.get_list_of_all_starships(get_all_starships_url)
+    return jsonify(
+        {
+            "starships": starship_service.get_list_of_all_starships(get_all_starships_url)
+        }
+    )
 
 @app.route('/starships/<manufacturer>', methods=['GET'])
-def get_starships_by_manufacturer(manufacturer):
+def get_starships_by_manufacturer(manufacturer = None):
     starship_service = StarshipService()
 
     list_of_all_starships = starship_service.get_list_of_all_starships(get_all_starships_url)
 
-    return starship_service.get_starships_by_manufacturer(list_of_all_starships, manufacturer)
+    return jsonify(
+        {
+            "starships": starship_service.get_starships_by_manufacturer(list_of_all_starships, manufacturer)
+        }
+    )
 
 if __name__ == '__main__':
     app.run(debug=True)
